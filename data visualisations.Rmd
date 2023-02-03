@@ -1,0 +1,56 @@
+---
+title: "Playing with data"
+author: "George Sebastian Hirjoaba"
+date: "2023-01-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(stringr)
+library(ggplot2)
+```
+
+```{r}
+df_iris = read_csv('iris_file.csv')
+df_sebi = read_csv('sebi_file.csv')
+df_eser = read_csv('eser_file.csv')
+head(df_iris)
+```
+
+
+```{r}
+ggplot(df_sebi, aes(fill=Type, x= Object)) + 
+  geom_bar(position="stack") +
+  scale_fill_manual(values=c("#DB18DA", "#191E71")) + 
+  theme_bw() +
+  labs(x = "Exhibit", y ="Time spent looking at exhibit (0.01s)") +
+  ggtitle("Which exhibit drew the most attention?", subtitle = "Looking at how much time users spent on each exhibit, separating painting and text")
+```
+
+```{r}
+ggplot(df_sebi, aes(x = Distance)) +
+  geom_bar() + 
+  labs(x = "Distance from object", y = 'Time spent looking at Object') +
+  ggtitle("Looking at the need to readjust for each exhibit") +
+  facet_wrap(~ Object) + 
+  scale_y_log10() +
+  theme_bw()
+```
+
+
+
+```{r}
+ggplot(df_sebi, aes(x = Distance)) +
+  geom_bar() + 
+  labs(x = "Distance from object", y = 'Time spent looking at Object') +
+  ggtitle("Looking at the need to readjust for each exhibit") +
+  facet_wrap(~ Object) + 
+  scale_y_log10() +
+  theme_bw()
+```
+
